@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/swiper-3.4.1.min.css" />
+		<style>
+			.swiper-container {
+				width: 500px;
+				height: 700px;
+				margin: 0 auto;
+			}
+			img{margin:0 atuo/*图片居中*/;width:100%}
+		</style>
+		<script src="js/jquery-1.10.1.min.js"></script>
+		<script src="js/swiper-3.4.1.jquery.min.js"></script>
+		<script>
+			$(function() {
+				var mySwiper = new Swiper('.swiper-container', {
+					direction: 'horizontal',//vertical
+					loop: true,
+					autoplay: 1000,
+					autoplayDisableOnInteraction : false,//手动控制后不自动播放		
+					paginationClickable :true,//分页符控制轮播
+					/*speed: 500,*/
+					effect:'slide',//slide,fade,cube,coverflow,flip;
+					/*slidesPerView:2,//auto//图片显示数量*/
+					/*grabCursor : true,//鼠标显示*/
+					/*$('#btn1').click(function(){
+mySwiper.stopAutoplay();
+})*/
+
+					// 如果需要分页器
+					pagination: '.swiper-pagination',
+
+					// 如果需要前进后退按钮
+					nextButton: '.swiper-button-next',
+					prevButton: '.swiper-button-prev',
+
+					// 如果需要滚动条
+					scrollbar: '.swiper-scrollbar',
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><img src="img/1.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="img/2.jpg" alt="" /></div>
+				<div class="swiper-slide"><img src="img/3.jpg" alt="" /></div>
+			</div>
+			<!-- 如果需要分页器 -->
+			<div class="swiper-pagination"></div>
+
+			<!-- 如果需要导航按钮 -->
+			<div class="swiper-button-prev"></div>
+			<div class="swiper-button-next"></div>
+
+			<!-- 如果需要滚动条 -->
+			<div class="swiper-scrollbar"></div>
+		</div>
+	</body>
+</html>

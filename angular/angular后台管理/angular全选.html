@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/lib/angular.min.js"></script>
+</head>
+<body ng-app="myApp">
+<div class="container" ng-controller="myCtrl">
+    全选<input ng-click="checkAll()"  ng-model="checked" type="checkbox"/>{{checked}}
+    <ul>
+        <li ng-repeat="data in datas">
+            {{data}}单选
+            <input type="checkbox" ng-click="checkSingle($index)" ng-model="checkedArr[$index]"/>
+            {{checkedArr[$index]}}
+        </li>
+    </ul>
+</div>
+</body>
+<script>
+    var app = angular.module("myApp",[]);
+
+    app.controller("myCtrl",function($scope){
+        //生成单选框
+        $scope.datas = [0,1,2,3,4];
+
+        //用数组记录单选状态
+        var len = $scope.datas.length;
+        $scope.checkedArr = [];
+        for(var i = 0;i < len;i++){
+            $scope.checkedArr.push(false);
+        }
+
+        //设置全选
+        $scope.checkAll=function(){
+                if($scope.checked){
+                    for(var i in $scope.checkedArr){
+                        $scope.checkedArr[i] = true;
+                    }
+                }else{
+                    for(var i in $scope.checkedArr){
+                        $scope.checkedArr[i] = false;
+                    }
+                }
+            };
+
+        //判断单选是否全选
+        $scope.checkSingle = function(index){
+            if($scope.checkedArr.indexOf(false) == -1){
+                $scope.checked = true;
+            }else{
+                $scope.checked = false;
+            }
+        }
+    })
+</script>
+</html>

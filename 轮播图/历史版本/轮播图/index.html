@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style type="text/css">
+		body,ul,li,span{
+			padding: 0;
+			margin: 0;
+		}
+		li{
+			list-style:none;
+		}
+
+		#banner{
+			width:640px;
+			height:320px;
+			margin:50px auto;
+			position:relative;
+			overflow:hidden;
+		}
+		#bant{
+			height:320px;
+			width:3840px;
+			padding:0;
+			margin:0;
+			overflow:hidden;
+			position:absolute;
+			left:-640px;
+		}
+
+		#bant li:nth-child(1){
+			position:absolute;
+			top:0;
+			left:0;
+		}
+		#bant li:nth-child(2){
+			position:absolute;
+			top:0;
+			left:640px;
+		}
+		#bant li:nth-child(3){
+			position:absolute;
+			top:0;
+			left:1280px;
+		}
+		#bant li:nth-child(4){
+			position:absolute;
+			top:0;
+			left:1920px;
+		}
+		#bant li:nth-child(5){
+			position:absolute;
+			top:0;
+			left:2560px;
+		}
+		#bant li:nth-child(6){
+			position:absolute;
+			top:0;
+			left:3200px;
+		}
+		#banz{
+			position:absolute;
+			right:40px;
+			bottom:10px;
+			margin:0;
+		}
+		#banz li{
+			float:left;
+			margin:5px;
+			height:20px;
+			width:20px;
+			border-radius:50%;
+			text-align:center;
+			background:orangered;
+			color:#000;
+			cursor: pointer;
+		}
+		#banz .licolor{
+			background:blue;
+		}
+
+		span{
+			position:absolute;
+			height:60px;
+			width:45px;
+			background:#000;
+			color:#fff;
+			font:35px/60px "微软雅黑";
+			text-align:center;
+			z-index:999;
+			opacity:0.7;
+			top:130px;
+			cursor: pointer;
+		}
+		span{
+			display:none;
+		}
+		#banner:hover span{
+			display:block;
+		}
+		span:nth-child(1){
+			left:0;
+		}
+
+		span:nth-child(2){
+			right:0;
+		}
+
+	</style>
+</head>
+<body>
+<div id="banner">
+	<span><</span>
+	<span>></span>
+	<ul id="bant">
+		<li><img src="img/img4.jpg" /></li>
+		<li><img src="img/img1.jpg" /></li>
+		<li><img src="img/img2.jpg" /></li>
+		<li><img src="img/img3.jpg" /></li>
+		<li><img src="img/img4.jpg" /></li>
+		<li><img src="img/img1.jpg" /></li>
+	</ul>
+	<ul id = "banz">
+		<li class="licolor">1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+</div>
+<script type="text/javascript" src="move.js" ></script>
+<script type="text/javascript">
+	var bant = document.getElementById("bant");
+	var oLi = bant.getElementsByTagName("li");
+	var banz = document.getElementById("banz");
+	var aLi = banz.getElementsByTagName("li");
+	var oSpan = document.getElementsByTagName("span");
+	var i = 1;
+	var flag = true;
+	var time = setInterval(go,2000);
+	for(var j = 0;j<aLi.length;j++){
+		aLi[j].index = j;
+		aLi[j].onmouseover = function(){
+			i = this.index;
+			go();
+		}
+	}
+
+	oSpan[1].onclick = function(){
+		if(flag){
+			go();
+		}
+	};
+
+	oSpan[0].onclick = function(){
+		if(flag){
+			if(i == 1){
+				bant.style.left = -640*(oLi.length-1)+"px";
+				i = oLi.length-3;
+			}else{
+				i = i - 2;
+			}
+			go();
+		}
+		console.log(bant.offsetLeft,i);
+	};
+
+	function go(){
+		console.log(bant.offsetLeft,i);
+		clearInterval(time);
+		flag = false;
+		for(var j = 0;j<aLi.length;j++){
+			aLi[j].className = " ";
+		}
+		i++;
+		if(i==oLi.length-1){
+			aLi[0].className = "licolor";
+		}else if(i==0){
+			aLi[aLi.length-1].className = "licolor";
+		}else{
+			aLi[i-1].className = "licolor";
+		}
+
+		startMove(bant,{"left":-i*640},second);
+	}
+
+
+
+	function second(){
+		time = setInterval(go,2000);
+		if(i == oLi.length-1){
+			i = 1;
+			bant.style.left = -640+"px";
+		}
+		flag = true;
+	}
+</script>
+</body>
+</html>

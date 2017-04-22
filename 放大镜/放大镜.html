@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>放大镜效果</title>
+    <script src="js/lib/jquery-2.2.4.min.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        img{display:block;}
+        .container{width:1200px;height:auto;border:1px solid #000;border-radius:20px;margin:auto;padding:20px;position:relative;}
+        .sbox{height:430px;width:430px;}
+        #sImg{height:430px;width:430px;position:relative;}
+        #move{width:100px;height:100px;background:#000;opacity:0.5;filter:alpha(opacity=50);position:absolute;top:0;left:0;}
+        .img-list{padding:20px;width:390px;height:60px;}
+        .img-list img{margin:0 5px;box-sizing:border-box;float:left;border:1px solid #fff;}
+        .img-list img:hover{border:1px solid #f00;}
+
+        #bView{position:absolute;top:20px;left:500px;overflow:hidden;display:none;width:430px;height:430px;}
+        #bView img{width:1000px;height:1000px;position:absolute;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box">
+        <div class="sbox">
+            <div id="sImg">
+                <img src="img/1.jpg"/>
+                <div id="move"></div>
+            </div>
+        </div>
+        <div class="img-list">
+            <img src="img/01.jpg"/>
+            <img src="img/02.jpg"/>
+            <img src="img/03.jpg"/>
+            <img src="img/04.jpg"/>
+            <img src="img/05.jpg"/>
+        </div>
+    </div>
+
+    <div id="bView">
+        <img id="bImg" src="img/1.jpg"/>
+    </div>
+</div>
+<script>
+    //声明变量
+    var $sImg = $("#sImg img"),
+            $move = $("#move"),
+            $bImg = $("#bImg"),
+            $bView = $("#bView");
+
+    //划过换图片的效果
+    $(".img-list img").mouseover(function(){
+        $sImg.attr("src","img/" + ($(this).index()+1) + ".jpg");
+        $bImg.attr("src","img/" + ($(this).index()+1) + ".jpg");
+    });
+
+    //放大镜效果
+    $("#sImg").hover(function(){
+        $move.stop().fadeIn();
+        $bView.stop().fadeIn();
+        $("#sImg").mousemove(function(e){//小视窗跟随运动
+            var $x = e.pageX;
+            var $y = e.pageY;
+            var $moveLeft =$x - $sImg.offset().left - $move.width()/2;
+            var $moveTop =$y - $sImg.offset().top - $move.height()/2;
+            if($moveLeft < 0){
+                $moveLeft = 0
+            }
+            if($moveTop < 0){
+                $moveTop = 0;
+            }
+            if($moveTop > $sImg.height() - $move.height()){
+                $moveTop = $sImg.height() - $move.height()
+            }
+            if($moveLeft > $sImg.width() - $move.width()){
+                $moveLeft = $sImg.width() - $move.width()
+            }
+            $move.css({"left":$moveLeft,"top":$moveTop});
+
+            //设置大图片的移动
+            $bImg.css({
+                "left":-$bImg.width() / $sImg.width() * $moveLeft,
+                "top":-$bImg.width() / $sImg.width() * $moveTop
+            })
+        })
+    },function(){
+        $move.stop().fadeOut();
+        $bView.stop().fadeOut();
+    });
+
+    //设置小视窗的大小
+    $move.width($bView.width() * $sImg.width() / $bImg.width());
+    $move.height($bView.height() * $sImg.height() / $bImg.height());
+</script>
+</body>
+</html>

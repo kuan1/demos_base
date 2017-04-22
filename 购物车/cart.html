@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/cart.css"/>
+
+    <script src="js/lib/jquery-2.2.4.min.js"></script>
+    <script src="js/lib/jquery.cookie.js"></script>
+    <script src="js/lib/template.js"></script>
+</head>
+<body>
+<h1><a href="goodslist.html">前往详情页</a></h1>
+<div class="container">
+    <table>
+        <tr>
+            <th>全选 <input class="all" type="checkbox"/></th>
+            <th>商品图片</th>
+            <th>商品描述</th>
+            <th>商品单价</th>
+            <th>商品总价</th>
+            <th>数量</th>          
+            <th>操作</th>
+        </tr>
+    </table>
+</div>
+<script type="text/html" id="cartMB">
+    <tr>
+        <td>单选 <input class="check" type="checkbox"/></td>
+        <td><img src="{{img}}"/></td>
+        <td>{{description}}</td>
+        <td>{{price}}</td>
+        <td class="money">总价</td>
+        <td><span class="reduce">减少</span><span class="m"></span><span class="add">增加</span></td>
+        <td><button>删除</button><span style="display:none;">{{gid}}</span></td>
+    </tr>
+</script>
+<script>
+	/*增加商品*/
+	$("table").on("click",".reduce",function(){
+		var countShow = $(this).next().children();
+		//console.log(countShow);
+		if(countShow.val() > 1){
+			countShow.val(parseInt(countShow.val()) - 1)
+		}else{
+			countShow.val(1)
+		}
+		var _val = countShow.val();
+		var gid = $(this).parent().next().children().last().text();
+
+		$.cookie(gid,_val,{expires:1})
+		
+		//计算数量
+		var p = $(this).parent().prev().prev().text().substring(1)
+		var money = $(this).parent().prev();
+		//console.log(money)
+		money.text(_val * p)
+	});
+	$("table").on("click",".add",function(){
+		var countShow = $(this).prev().children();
+		console.log(countShow);
+		if(countShow.val() > 0){
+			countShow.val(parseInt(countShow.val()) + 1)
+		}else{
+			countShow.val(1)
+		}
+		var _val = countShow.val();
+		var gid = $(this).parent().next().children().last().text();
+
+		$.cookie(gid,_val,{expires:1})
+		
+		//计算数量
+		var p = $(this).parent().prev().prev().text().substring(1)
+		var money = $(this).parent().prev();
+		//console.log(money)
+		money.text(_val * p)
+	})
+
+
+    //console.log($.cookie());
+    $.getJSON("json/goodslist.json").done(function(data){
+
+        $.each($.cookie(),function(index){
+            var that = this;
+            for(var i in data){
+                if(data[i].gid == index){
+                    var html = template("cartMB",data[i]);
+                    $("table").append(html);
+                    var $inp = $("<input>");
+                    $inp.appendTo($(".m").last()).val(that);
+                    //数量：that  
+                    var p = data[i].price.substring(1);
+                    console.log(p,that)
+                    $(".money").last().text(that * p)
+                    $inp.css({
+                    	"width":30,
+                    	"text-align":"center"
+                    })
+                    //console.log($(".m").last(),that)
+                }
+            }
+        })
+    });
+	/*	end*/
+	
+    //删除cookie
+    $(".container").on("click","button",function(){
+       
+        $(this).parent().parent().remove();
+        $.removeCookie($(this).next().text())
+    })
+	/*	end*/
+	
+	
+	
+    //设置全选和全不选
+    $(function() {
+        $(".all").click(function() {
+            if(this.checked) {
+                $(".all").prop("checked", true);
+                $(".check").prop("checked", true);
+            } else {
+                $(".check").removeAttr("checked");
+                $(".all").removeAttr("checked")
+            }
+        });
+        //全选和全不选自动选中
+        var m; //记录复选框选中状态
+        $(".check").click(function() {
+            //判断复选框所有复选框的选中状态
+            m = 0;//
+            $(".check").each(function() {
+                if($(this).prop('checked')) {
+                    m++;
+                }
+            });
+            if(m == $(".check").length) {
+                $(".all").prop("checked", true);
+                $(".check").prop("checked", true);
+            }
+            if(m < $(".check").length) {
+                $(".all").removeAttr("checked")
+            }
+        })
+    });
+</script>
+</body>
+</html>

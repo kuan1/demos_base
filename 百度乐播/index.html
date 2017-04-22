@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>百度乐播-首页</title>
+		<link rel="stylesheet" href="js/swiper.min.css">
+		<link rel="stylesheet" href="css/index.css">
+
+		<script src="js/jquery-1.11.3.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/swiper.jquery.min.js"></script>
+		<script src="js/template.js"></script>
+		<script src="js/app/index.js"></script>
+	</head>
+	<body>
+	<header>
+		<ul>
+			<li><img src="img/logo.jpg"></li>
+			<li><a href="index.html">首页</a></li>
+			<li><a href="#"></a></li>
+			<li><a href="#">菜单</a></li>
+			<li><a href="collect.html">我的收藏</a></li>
+			<li><a href="#">下载客户端</a></li>
+		</ul>
+	</header>
+
+	<div class="container clear">
+		<div class="main">
+			<div class="clear">
+				<div class="time">
+					<div class="imgbox">
+						<img src="img/tuijian.jpg" alt="">
+					</div>
+					<p id="time">显示时间</p>
+				</div>
+
+				<div class="page-banner swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"><img src="img/banner/banner1.jpg" alt=""></div>
+						<div class="swiper-slide"><img src="img/banner/banner2.jpg" alt=""></div>
+						<div class="swiper-slide"><img src="img/banner/banner3.jpg" alt=""></div>
+					</div>
+
+					<!-- Add Arrows -->
+					<div class="swiper-button-next arrow"></div>
+					<div class="swiper-button-prev arrow"></div>
+				</div>
+			</div>
+
+			<!--节目观看部分-->
+			<div class="content">
+				<p class="ctitle">节目推荐/ <a href="#">换一批</a></p>
+			</div>
+		</div>
+
+		<div class="aside">
+			<img src="img/main-right.png" alt="">
+		</div>
+	</div>
+	</body>
+	<script type="text/html" id="MB">
+		<div class="box">
+			<img src="{{pic}}" alt="">
+			<p>{{title}}</p>
+			<p>
+				<span class="type1">{{sort}}</span>
+				<span>{{author}}</span>
+			</p>
+			<p><span style="display:none;">{{id}}</span><button class="type1 collect">收藏</button></p>
+		</div>
+	</script>
+</html>

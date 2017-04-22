@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			html,
+			body {
+				font-family: Segoe, "Segoe UI", "DejaVu Sans", "Trebuchet MS", Verdana, sans-serif;
+			}			
+			ul,ol {
+				padding: 0;
+			}
+			
+			.banner {
+				position: relative;
+				overflow: auto;
+				text-align: center;
+				width: 640px;
+				/*可以更改位置*/
+			}
+			
+			.banner li {
+				list-style: none;
+			}
+			
+			.banner ul li {
+				float: left;
+			}
+			.banner .dots {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 20px;
+			}
+			
+			.banner .dots li {
+				display: inline-block;
+				width: 10px;
+				height: 10px;
+				margin: 0 4px;
+				text-indent: -999em;
+				border: 2px solid #fff;
+				border-radius: 6px;
+				cursor: pointer;
+				opacity: .4;
+				-webkit-transition: background .5s, opacity .5s;
+				-moz-transition: background .5s, opacity .5s;
+				transition: background .5s, opacity .5s;
+			}
+			
+			.banner .dots li.active {
+				background: #fff;
+				opacity: 1;
+			}
+			
+			.banner .arrow {
+				position: absolute;
+				top: 200px;
+			}
+			
+			.banner #al {
+				left: 15px;
+			}
+			
+			.banner #ar {
+				right: 15px;	
+				}
+		</style>
+		<script src="js/lib/jquery-1.12.4.js"></script>
+		<script src="js/lib/unslider.min.js"></script>
+		<script>
+			$(document).ready(function(e) {
+				var unslider = $('.banner').unslider({
+					animation: 'vertical',
+						dots:true,
+						delay:2000,
+					}),
+
+					data = unslider.data('unslider');
+				$('.unslider-arrow').click(function() {
+					var fn = this.className.split(' ')[1];
+					data[fn]();
+				});
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="banner" id="b04">
+			<ul>
+				<li><img src="img/01.jpg" alt="" /></li>
+				<li><img src="img/02.jpg" alt="" /></li>
+				<li><img src="img/03.jpg" alt="" /></li>
+				<li><img src="img/04.jpg" alt="" /></li>
+				<li><img src="img/05.jpg" alt="" /></li>
+			</ul>
+			<a href="javascript:void(0);" class="unslider-arrow prev"><img class="arrow" id="al" src="img/arrowl.png" alt="prev" width="20" height="35"></a>
+
+			<a href="javascript:void(0);" class="unslider-arrow next"><img class="arrow" id="ar" src="img/arrowr.png" alt="next" width="20" height="37"></a>
+		</div>
+	</body>
+
+</html>

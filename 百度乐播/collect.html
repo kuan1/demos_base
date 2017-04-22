@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>收藏页面</title>
+    <link rel="stylesheet" href="css/collect.css">
+
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery.cookie.js"></script>
+    <script src="js/swiper.jquery.min.js"></script>
+    <script src="js/template.js"></script>
+    <script>
+        $(function(){
+            $("#header").load("index.html header")
+        })
+    </script>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+
+    </div>
+</body>
+<script type="text/html" id="collectMB">
+    <div class="box">
+        <img src="{{pic}}">
+        <div>
+            <p>{{title}}</p>
+            <p class="orange">时间：{{update}}</p>
+            <p class="orange">播放次数：{{play}}</p>
+            <p>{{author}}</p>
+        </div>
+        <span style="display:none">{{id}}</span>
+        <button class="type1 collect">取消收藏</button>
+    </div>
+</script>
+<script>
+    /*读取cookie*/
+    $.getJSON("js/showData.json").done(function(data){
+        $.each(data,function(){
+            if($.cookie(this.id)){
+                var html = template("collectMB",this);
+                $(".container").append(html);
+            }
+        })
+    });
+
+    /*删除cookie*/
+    $(".container").on("click","button",function(){
+        $(this).parent().remove();
+
+        var tid = $(this).prev().text();
+        //console.log(tid)
+        $.removeCookie(tid);
+    });
+
+
+    /*理解错误*/
+    /*    $.getJSON("js/showData.json").done(function(data){
+     //console.log(data)
+     $.each(data,function(){
+     var html = template("collectMB",this);
+     $(".container").append(html);
+     if($.cookie(this.id) == this.id){
+     //页面加载时候判断时候收藏
+     $(".collect").last().text("取消收藏");
+     }
+     //console.log(this.pic)
+     })
+     });
+
+
+     //加入收藏功能实现
+     $(".container").on("click","button",function(){
+     var tid = $(this).prev().text();
+     //console.log($.cookie(tid));
+     if($.cookie(tid)){
+     $(this).text("收藏");
+     console.log($(this));
+     $(this).removeAttr("style");
+     $.removeCookie(tid)
+     }else{
+     $.cookie(tid,tid);
+     $(this).text("取消收藏");
+     }
+     console.log($.cookie());
+     });*/
+</script>
+</html>

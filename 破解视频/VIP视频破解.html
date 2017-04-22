@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .container{width:600px;min-height:200px;margin:20px auto;border:1px solid #ccc;border-radius:10px;padding:30px;font-size:20px;line-height:50px;}
+        input{width:470px;height:40px;}
+        button{padding:5px 10px;margin:20px 10px;}
+        #help{width:500px;margin:20px auto;color:#aaa;border:1px solid #ccc;line-height:30px;padding:30px;position:relative;}
+        #help span{color:#000;font-weight:bold;}
+        #help button{background:0;border-radius:10px;position:absolute;right:0;top:0;}
+    </style>
+</head>
+<body>
+<div class="container">
+    <p>
+        <label for="val">视频播放地址：</label> <br/>
+        <input id="val" type="text"/>
+        <button id="resbtn">清空输入框</button>
+    </p>
+    <button id="btn1">视频破解接口1</button>
+    <button id="btn2">视频破解接口2</button>
+    <button id="btn3">视频破解接口3</button>
+    <button id="btn4">视频破解接口4</button>
+    <button id="btn5">视频破解接口5</button>
+    <button id="btn6">视频破解接口6</button>
+    <button id="btn7">视频破解接口7</button>
+    <button id="btn8">视频破解接口8</button>
+    <button id="btn9">视频破解接口9</button>
+</div>
+<div id="help">
+    <button id="closebtn">关闭X</button>
+    <span>支持爱奇艺、优酷等个网站VIP视频破解</span> <br/> <br/>
+    将播放的VIP视频地址复制到输入框 <br/>
+    点击对应接口播放视频 <br/>
+    或者按大键盘上1-9的快捷键
+</div>
+</body>
+<script>
+    var _val = document.getElementById("val");
+    var _help = document.getElementById("help");
+
+    btn1.onclick = function(){
+        window.open("http://www.wmxz.wang/video.php?url=" + _val.value);
+    };
+    btn2.onclick = function(){
+        window.open("http://www.yydy8.com/common/?url=" + _val.value);
+    };
+    btn3.onclick = function(){
+        window.open("http://qtzr.net/s/?qt=" + _val.value);
+    };
+    btn4.onclick = function(){
+        window.open("http://aikan-tv.com/tong.php?url="+_val.value);
+    };
+    btn5.onclick = function(){
+        window.open("http://www.vipjiexi.com/yun.php?url=" + _val.value);
+    };
+    btn6.onclick = function(){
+        window.open(" http://www.xiguaso.com/api/index.php?url=" + _val.value);
+    };
+    btn7.onclick = function(){
+        window.open("http://player.gakui.top/?url=" + _val.value);
+    };
+    btn8.onclick = function(){
+        window.open("http://mt2t.com/yun?url=" + _val.value);
+    };
+    btn9.onclick = function(){
+        window.open("http://www.vipjiexi.com/yun.php?url=" + _val.value);
+    };
+
+    document.onkeydown = function(e){
+        var e = e || window.event;
+        console.log(e.keyCode);
+        if(e.keyCode == 49){
+            window.open("http://www.wmxz.wang/video.php?url=" + _val.value);
+        }
+        if(e.keyCode == 50){
+            window.open("http://www.yydy8.com/common/?url=" + _val.value);
+        }
+        if(e.keyCode == 51){
+            window.open("http://qtzr.net/s/?qt=" + _val.value)
+        }
+        if(e.keyCode == 52){
+            window.open("http://aikan-tv.com/tong.php?url="+_val.value);
+        }
+        if(e.keyCode == 53){
+            window.open("http://www.vipjiexi.com/yun.php?url=" + _val.value);
+        }
+        if(e.keyCode == 54){
+            window.open(" http://www.xiguaso.com/api/index.php?url=" + _val.value);
+        }
+        if(e.keyCode == 55){
+            window.open("http://player.gakui.top/?url=" + _val.value);
+        }
+        if(e.keyCode == 56){
+            window.open("http://mt2t.com/yun?url=" + _val.value);
+        }
+        if(e.keyCode == 57){
+            window.open("http://mt2t.com/yun?url=" + _val.value);
+        }
+    };
+
+    resbtn.onclick = function(){
+      _val.value = "";
+    };
+
+    closebtn.onclick = function(){
+       this.parentNode.style.display = "none";
+    }
+</script>
+</html>

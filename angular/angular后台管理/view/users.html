@@ -1,0 +1,37 @@
+<div ng-controller="recordCtrl">
+    <div class="rol">
+        <button class="btn navbar-btn btn-default" ng-click="selectDel()">批量删除</button>
+        <button ng-click="addUser()" class="btn navbar-btn btn-success"  data-toggle="modal" data-target="#myModal">新增客户</button>
+        <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" ng-model="searchWord"/>
+            <button ng-click="search()" class="btn btn-primary">搜索</button>
+        </form>
+    </div>
+    <div class="rol">
+        <table class="table table-bordered table-hover">
+            <tr class="info">
+                <th>全选<input ng-click="checkAll()"  ng-model="checked" type="checkbox"/></th>
+                <th ng-click="orderWord='uid'">用户编号</th>
+                <th ng-click="orderWord='uname'">联系人</th>
+                <th ng-click="orderWord='sex'">性别</th>
+                <th ng-click="orderWord='tel'">联系方式</th>
+                <th>操作</th>
+            </tr>
+
+            <tr ng-repeat="user in users | filter:keyWord | orderBy:orderWord">
+                <td>单选<input type="checkbox" ng-click="checkSingle($index)" ng-model="checkedArr[$index]"/></td>
+                <td>{{user.uid}}</td>
+                <td>{{user.uname}}</td>
+                <td>{{user.sex}}</td>
+                <td>{{user.tel}}</td>
+                <td>
+                    <button data-toggle="modal" data-target="#myModal" class="btn-danger" ng-click="editTr($index)">编辑</button>
+                    <button class="btn-danger" ng-click="deleteTr($index)">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
